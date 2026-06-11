@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>frazPivot — Open-source pivot table library</title>
+  <meta name="description" content="frazPivot: a free, open-source pivot table and chart library for the web. No dependencies. Drop-in replacement for Flexmonster.">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="dist/frazPivot.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f4f6f9; color: #111; }
+
+    /* ── Hero ── */
+    .hero { background: #fff; border-bottom: 1px solid #e8e8e8; padding: 48px 32px 40px; text-align: center; }
+    .hero-badge { display: inline-block; background: #e6f1fb; color: #185FA5; font-size: 11px; font-weight: 600;
+                  padding: 4px 12px; border-radius: 20px; letter-spacing: .04em; margin-bottom: 16px; }
+    .hero h1 { font-size: 36px; font-weight: 700; letter-spacing: -.5px; margin-bottom: 12px; }
+    .hero h1 span { color: #185FA5; }
+    .hero p { font-size: 16px; color: #555; max-width: 520px; margin: 0 auto 28px; line-height: 1.6; }
+    .hero-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: #185FA5; color: #fff; padding: 10px 22px; border-radius: 6px;
+                   font-size: 14px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; }
+    .btn-primary:hover { background: #0c447c; }
+    .btn-secondary { background: #fff; color: #333; padding: 10px 22px; border-radius: 6px;
+                     font-size: 14px; font-weight: 600; text-decoration: none;
+                     border: 1px solid #ccc; cursor: pointer; }
+    .btn-secondary:hover { background: #f5f5f5; }
+
+    /* ── Features ── */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 16px; padding: 40px 32px; max-width: 960px; margin: 0 auto; }
+    .feat { background: #fff; border: 1px solid #e8e8e8; border-radius: 8px; padding: 18px 20px; }
+    .feat-icon { font-size: 22px; margin-bottom: 8px; }
+    .feat h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .feat p  { font-size: 12px; color: #666; line-height: 1.5; }
+
+    /* ── Live demo ── */
+    .demo-section { padding: 0 32px 40px; max-width: 960px; margin: 0 auto; }
+    .demo-section h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .demo-section .sub { font-size: 13px; color: #666; margin-bottom: 16px; }
+    .demo-tabs { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .demo-tab { padding: 5px 14px; border: 1px solid #ccc; border-radius: 20px; background: #fff;
+                cursor: pointer; font-size: 12px; font-weight: 500; color: #555; }
+    .demo-tab:hover { background: #f5f5f5; }
+    .demo-tab.active { background: #185FA5; border-color: #185FA5; color: #fff; }
+    #pivot-demo { border-radius: 8px; overflow: hidden; box-shadow: 0 1px 8px rgba(0,0,0,.1); }
+
+    /* ── Install ── */
+    .install { background: #fff; border-top: 1px solid #e8e8e8; padding: 40px 32px; }
+    .install-inner { max-width: 760px; margin: 0 auto; }
+    .install h2 { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+    .install pre { background: #1e1e2e; color: #cdd6f4; border-radius: 8px; padding: 16px 18px;
+                   font-size: 13px; overflow-x: auto; line-height: 1.7; margin-bottom: 16px; }
+    .install .comment { color: #6c7086; }
+    .install .kw { color: #cba6f7; }
+    .install .str { color: #a6e3a1; }
+    .install .key { color: #89dceb; }
+
+    /* ── Footer ── */
+    footer { text-align: center; padding: 24px; font-size: 12px; color: #999; border-top: 1px solid #e8e8e8; background: #fff; }
+    footer a { color: #185FA5; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">Open Source · MIT License</div>
+    <h1><span>fraz</span>Pivot</h1>
+    <p>A free, open-source pivot table and chart library for the web.
+       Drag-and-drop fields, multi-level grouping, aggregations, data bars, CSV export — zero licensing fees.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="https://github.com/YOUR_USERNAME/frazPivot">⭐ Star on GitHub</a>
+      <a class="btn-secondary" href="dist/frazPivot.js" download>↓ Download frazPivot.js</a>
+      <a class="btn-secondary" href="demo/index.html">View full demo →</a>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feat"><div class="feat-icon">⊞</div><h3>Pivot grid</h3><p>Drag fields into rows, columns, and values. Multi-level grouping with grand totals.</p></div>
+    <div class="feat"><div class="feat-icon">▦</div><h3>Chart view</h3><p>Switch from grid to bar chart with one click. Powered by Chart.js (optional).</p></div>
+    <div class="feat"><div class="feat-icon">∑</div><h3>Aggregations</h3><p>Sum, average, min, max, count — per field, independently configured.</p></div>
+    <div class="feat"><div class="feat-icon">⬛</div><h3>Data bars</h3><p>Inline visual bars overlay on numeric cells for instant pattern recognition.</p></div>
+    <div class="feat"><div class="feat-icon">⇅</div><h3>Sort & filter</h3><p>Click any column header to sort. Live text filter narrows rows instantly.</p></div>
+    <div class="feat"><div class="feat-icon">↓</div><h3>CSV export</h3><p>Export the current pivot view to CSV with one click.</p></div>
+    <div class="feat"><div class="feat-icon">0⃣</div><h3>Zero dependencies</h3><p>Core grid needs nothing. Chart.js is optional and loaded separately.</p></div>
+    <div class="feat"><div class="feat-icon">📦</div><h3>UMD bundle</h3><p>Works as a script tag, CommonJS require(), or AMD module.</p></div>
+  </div>
+
+  <!-- Live demo -->
+  <div class="demo-section">
+    <h2>Live demo</h2>
+    <p class="sub">Drag fields from the left panel into Rows, Columns, and Values to explore.</p>
+    <div class="demo-tabs">
+      <button class="demo-tab active" onclick="loadDS('sales',this)">Sales</button>
+      <button class="demo-tab" onclick="loadDS('hr',this)">HR</button>
+      <button class="demo-tab" onclick="loadDS('ecom',this)">E-commerce</button>
+      <button class="demo-tab" onclick="loadDS('ivd',this)">IVD diagnostics</button>
+    </div>
+    <div id="pivot-demo"></div>
+  </div>
+
+  <!-- Install -->
+  <div class="install">
+    <div class="install-inner">
+      <h2>Get started in 3 lines</h2>
+      <pre><span class="comment">&lt;!-- Optional: Chart.js for chart view --&gt;</span>
+&lt;<span class="kw">script</span> src=<span class="str">"https://cdn.jsdelivr.net/npm/chart.js"</span>&gt;&lt;/<span class="kw">script</span>&gt;
+
+&lt;<span class="comment">!-- frazPivot --&gt;</span>
+&lt;<span class="kw">script</span> src=<span class="str">"https://YOUR_USERNAME.github.io/frazPivot/dist/frazPivot.js"</span>&gt;&lt;/<span class="kw">script</span>&gt;
+
+&lt;<span class="kw">div</span> id=<span class="str">"my-pivot"</span>&gt;&lt;/<span class="kw">div</span>&gt;
+
+&lt;<span class="kw">script</span>&gt;
+<span class="kw">const</span> pivot = <span class="kw">new</span> <span class="key">frazPivot</span>(<span class="str">'#my-pivot'</span>, {
+  <span class="key">fields</span>:        [<span class="str">'Region'</span>, <span class="str">'Category'</span>, <span class="str">'Revenue'</span>, <span class="str">'Units'</span>],
+  <span class="key">numericFields</span>: [<span class="str">'Revenue'</span>, <span class="str">'Units'</span>],
+  <span class="key">data</span>: [
+    [<span class="str">'North'</span>, <span class="str">'Electronics'</span>, 182000, 45],
+    [<span class="str">'South'</span>, <span class="str">'Healthcare'</span>,  310000,  8],
+  ],
+  <span class="key">rows</span>: [<span class="str">'Region'</span>],
+  <span class="key">vals</span>: [<span class="str">'Revenue'</span>],
+});
+&lt;/<span class="kw">script</span>&gt;</pre>
+
+      <pre><span class="comment">// Load data from your SAP B1 / REST API</span>
+fetch(<span class="str">'/api/sales-data'</span>)
+  .then(res => res.json())
+  .then(json => {
+    pivot.<span class="key">loadData</span>(json.fields, json.numericFields, json.rows);
+  });</pre>
+    </div>
+  </div>
+
+  <footer>
+    frazPivot v1.0.0 &nbsp;·&nbsp; MIT License &nbsp;·&nbsp;
+    Built by <a href="https://github.com/YOUR_USERNAME">ViSole Group / GMS</a> &nbsp;·&nbsp;
+    <a href="https://github.com/YOUR_USERNAME/frazPivot">GitHub</a>
+  </footer>
+
+  <script>
+    const DS = {
+      sales:{fields:['Region','Category','Product','Rep','Quarter','Revenue','Units','Margin%'],numericFields:['Revenue','Units','Margin%'],data:[['North','Electronics','Laptop','Ali','Q1',182000,45,28],['North','Electronics','Phone','Sara','Q1',94000,120,32],['North','Healthcare','Analyzer','Ali','Q1',310000,8,42],['South','Electronics','Laptop','Raza','Q1',143000,35,26],['South','Healthcare','Reagent','Sara','Q1',87000,200,55],['East','Electronics','Phone','Nida','Q1',110000,140,31],['East','Healthcare','Analyzer','Raza','Q1',280000,7,44],['West','Electronics','Laptop','Nida','Q1',165000,40,29],['North','Electronics','Laptop','Ali','Q2',195000,48,30],['North','Healthcare','Reagent','Sara','Q2',92000,210,54],['South','Electronics','Phone','Raza','Q2',121000,155,33],['South','Healthcare','Analyzer','Nida','Q2',325000,9,45],['East','Electronics','Laptop','Ali','Q2',155000,38,27],['East','Healthcare','Reagent','Sara','Q2',78000,180,53],['West','Electronics','Phone','Raza','Q2',98000,125,30],['West','Healthcare','Analyzer','Nida','Q2',295000,7,43]],rows:['Region'],vals:['Revenue']},
+      hr:{fields:['Dept','Grade','Gender','City','Headcount','Salary','Tenure'],numericFields:['Headcount','Salary','Tenure'],data:[['Finance','L3','M','Islamabad',12,95000,4.2],['Finance','L4','F','Karachi',8,125000,6.1],['IT','L3','M','Islamabad',22,105000,3.5],['IT','L4','F','Lahore',14,138000,5.8],['Sales','L2','M','Karachi',35,72000,2.1],['Sales','L3','F','Islamabad',28,88000,3.9],['Operations','L2','M','Lahore',18,68000,2.5],['HR','L3','F','Islamabad',9,90000,5.2],['IT','L5','M','Islamabad',6,170000,7.4],['Finance','L5','F','Karachi',4,165000,8.1]],rows:['Dept'],vals:['Headcount']},
+      ecom:{fields:['Category','Brand','Country','Channel','Orders','Revenue','Returns','AOV'],numericFields:['Orders','Revenue','Returns','AOV'],data:[['Electronics','Samsung','PK','Web',1200,3600000,48,3000],['Electronics','Apple','PK','App',880,5280000,22,6000],['Healthcare','Roche','PK','Web',340,1700000,5,5000],['Clothing','Khaadi','PK','App',2200,880000,110,400],['Electronics','Samsung','AE','Web',2800,8400000,84,3000],['Electronics','Apple','AE','App',1900,11400000,38,6000],['Healthcare','Abbott','AE','Web',620,2480000,12,4000],['Clothing','Zara','AE','App',3400,3400000,170,1000]],rows:['Category'],vals:['Revenue']},
+      ivd:{fields:['Principal','Product','Account','City','Quarter','Revenue','Units','GP%'],numericFields:['Revenue','Units','GP%'],data:[['bioMérieux','VITEK MS','AKUH','Karachi','Q1',1850000,12,38],['bioMérieux','VITEK 2','Shaukat Khanum','Lahore','Q1',920000,8,42],['bioMérieux','Blood Culture','Chughtai Lab','Lahore','Q1',480000,200,55],['Beckman Coulter','AU680','AKUH','Karachi','Q1',2100000,5,35],['Beckman Coulter','DXH 900','Military Hospital','Rawalpindi','Q1',750000,3,40],['Leica Biosystems','Aperio GT450','AKUH','Karachi','Q1',3200000,2,45],['Hologic','Panther','Shaukat Khanum','Lahore','Q1',1400000,4,38],['bioMérieux','VITEK MS','AKUH','Karachi','Q2',1950000,13,39],['Beckman Coulter','AU680','Chughtai Lab','Lahore','Q2',1800000,4,36],['Radiometer','ABL90','Military Hospital','Rawalpindi','Q2',620000,6,42],['Leica Biosystems','Bond RX','AKUH','Karachi','Q2',1100000,3,48],['Hologic','Panther','AKUH','Karachi','Q2',1600000,5,39]],rows:['Principal'],vals:['Revenue']},
+    };
+    let pivot = new frazPivot('#pivot-demo', { ...DS.sales, height: '520px' });
+    function loadDS(name, btn) {
+      document.querySelectorAll('.demo-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const d = DS[name];
+      pivot.loadData(d.fields, d.numericFields, d.data);
+      pivot.setFields({ rows: d.rows, cols: [], vals: d.vals });
+    }
+  </script>
+</body>
+</html>

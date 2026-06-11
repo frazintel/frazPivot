@@ -1,7 +1,7 @@
 /*!
  * frazPivot v1.0.0
  * Open-source pivot table & chart library
- * Author: ViSole Group / GMS
+ * Author: Syed Sarfraz Ali
  * License: MIT
  */
 (function (global, factory) {
